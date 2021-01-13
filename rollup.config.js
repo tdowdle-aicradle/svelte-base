@@ -41,7 +41,13 @@ export default {
 	plugins: [
 		svelte({
 			preprocess: sveltePreprocess({
-                postcss: true,
+				postcss: true,
+				scss: {
+                    includePaths: ["src"],
+                    postcss: {
+                        plugins: [require("autoprefixer")],
+                    },
+                },
             }),
 			compilerOptions: {
 				// enable run-time checks when not in production
