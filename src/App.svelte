@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Tailwind from "./components/Tailwind.svelte"
+    import Tailwind from "./Tailwind.svelte"
 </script>
 
 <style lang="scss">
@@ -12,5 +12,5 @@
 
 <Tailwind />
 <main>
-    <h1 class="text-red-400">The rest of our app will be here</h1>
+    <h1 class="text-red-400">Big Text</h1>
 </main>
