@@ -103,3 +103,11 @@ Then, from within your project folder:
 npm run build
 surge public my-project.surge.sh
 ```
+
+
+### Troubleshooting - In Work
+
+### Code splitting example
+
+https://github.com/ItalyPaleAle/svelte-spa-router/tree/master/examples/dynamic-imports
+

@@ -8,14 +8,15 @@
 	import Router from 'svelte-spa-router';
 
 	import Dashboard from './routes/Dashboard.svelte';
-	import Event from './routes/Event.svelte';
 	import NotFound from './routes/NotFound.svelte';
 
 	const routes = {
 		// Exact path
 		'/': Dashboard,
 		// Using named parameters
-		'/event/:id': Event,
+		'/event/:id': wrap({
+    		asyncComponent: () => import('./routes/Event.svelte')
+		}),
 		// Catch-all
 		// This is optional, but if present it must be the last
 		'*': NotFound,
