@@ -6,6 +6,7 @@
 	import type { MenuBarItem } from './types/menubar.type';
 
 	import Router from 'svelte-spa-router';
+	import {wrap} from 'svelte-spa-router/wrap';
 
 	import Dashboard from './routes/Dashboard.svelte';
 	import NotFound from './routes/NotFound.svelte';
