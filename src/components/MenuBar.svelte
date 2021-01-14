@@ -70,10 +70,10 @@
                     <img src="./assets/active-state-mark.svg" />
                 </div>
                 <div class="icon">
-                    menuItem.svgComponent
+                    <img src="{menuItem.svgComponent}" />
                 </div>
                 {#if menuOpen}
-                    <a class="pl-4">menuItem.name</a>
+                    <a class="pl-4">{menuItem.name}</a>
                 {/if}
             </a>
         {/each}

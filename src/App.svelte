@@ -5,8 +5,34 @@
 
 	import type { MenuBarItem } from './types/menubar.type';
 
-	let menuItems: Array<MenuBarItem> = [];
+	let dashboardSvg = "./assets/dashboard.svg";
+	let notesSvg = "./assets/notes.svg";
+	let settingsSvg = "./assets/settings.svg";
+	let logoutSvg = "./assets/logout.svg";
 
+	let menuItems: Array<MenuBarItem> = [
+      {
+        name: "Dashboard",
+        url: "/",
+        svgComponent: dashboardSvg
+      },
+      {
+        name: "Accident Details",
+        url: `/event/activeEventId`,
+        svgComponent: notesSvg
+      },
+      {
+        name: "Settings",
+        url: "/settings",
+        svgComponent: settingsSvg
+      },
+      {
+        name: "Logout",
+        url: "/logout",
+        svgComponent: logoutSvg
+      }
+	];
+	
 	let sideBarOpen = false;
 
 	function toggleSideBar(event) {
