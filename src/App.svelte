@@ -6,7 +6,6 @@
 	import type { MenuBarItem } from './types/menubar.type';
 
 	import Router from 'svelte-spa-router';
-	import {wrap} from 'svelte-spa-router/wrap';
 
 	import Dashboard from './routes/Dashboard.svelte';
 	import Event from './routes/Event.svelte';
@@ -79,6 +78,7 @@
 				on:sideBarClose={toggleSideBar}
 				on:sideBarOpen={toggleSideBar}
 				isOpen="{sideBarOpen}"
+				rightHand="{true}"
 			>
 
 			<!-- Do we need two slots here? -->
