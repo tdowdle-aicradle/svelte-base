@@ -1,9 +1,12 @@
-<script>
+<script lang="ts">
+
+    import { createEventDispatcher } from 'svelte';
+    import SideBarControlIcon from './SideBarControlIcon.svelte';
+
     export let isOpen = false;
     export let rightHand = true;
     export let background = "linear-gradient(180deg, #1b1a27 0%, #20222d 57.44%, #2c2e3c 100%)";
 
-    import { createEventDispatcher } from 'svelte';
 
     const dispatch = createEventDispatcher();
 
@@ -11,6 +14,12 @@
         position: "fixed",
         background: background
     }
+
+    let customStyles = '';
+
+    $: Object.entries(styleObject).forEach(([key, value]) => {
+		customStyles += `${key}: ${value};`
+	})
 
     function emitSideBarClose() {
 		dispatch('sideBarClose');
@@ -20,22 +29,37 @@
     }
 </script>
 
-<style>
-	/* styles go here */
+<style lang="scss">
+    /* styles go here */
+.side-bar {
+  &__right {
+    &--closed {
+      min-width: 25px;
+    }
+  }
+  &__left {
+    &--closed {
+      min-width: 25px;
+    }
+  }
+}
 </style>
 
 
 {#if isOpen}
     <div
-        style="{styleObject}"
+        style="{customStyles}"
         class="side-bar h-full min-h-screen shadow"
-        :class="{rightHand ? 'side-bar__right right-0' : 'side-bar__left left-0'}"
+        class:side-bar__right="{rightHand}"
+        class:right-0="{rightHand}"
+        class:side-bar__left="{!rightHand}"
+        class:left-0="{!rightHand}"
     >
         <div id="sideBarCloseControl" on:click="{emitSideBarClose}">
             <SideBarControlIcon
-                rightHandControl="{rightHand}"
-                isOpen="{isOpen}"
-            ></SideBarControlIcon>
+            rightHandControl="{rightHand}"
+            isOpen="{isOpen}"
+          ></SideBarControlIcon>
         </div>
         <div>
             <slot name="opened-slot"></slot>
@@ -43,15 +67,20 @@
     </div>
 {:else}
     <div
-        style="{styleObject}"
+        style="{customStyles}"
         class="side-bar h-full min-h-screen shadow"
-        :class="{rightHand ? 'right-0 side-bar__right side-bar__right--closed' : 'left-0 side-bar__left side-bar__left--closed'}"
+        class:side-bar__right="{rightHand}"
+        class:right-0="{rightHand}"
+        class:side-bar__right--closed="{rightHand}"
+        class:side-bar__left="{!rightHand}"
+        class:left-0="{!rightHand}"
+        class:side-bar__left--closed="{!rightHand}"
     >
     <div id="sideBarOpenControl" on:click="{emitSideBarOpen}">
         <SideBarControlIcon
-            rightHandControl="rightHand"
-            isOpen="isOpen"
-        ></SideBarControlIcon>
+        rightHandControl="{rightHand}"
+        isOpen="{isOpen}"
+      ></SideBarControlIcon>
         </div>
         <div>
         <slot name="closed-slot"></slot>

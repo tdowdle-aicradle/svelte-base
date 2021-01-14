@@ -1,0 +1,64 @@
+
+// fonts
+$font-regular: "Helvetica Neue LT W05 55 Roman", HelveticaNeue, Helvetica Neue,
+  Helvetica, Arial, Lucida Grande, sans-serif;
+
+// colors
+$axis-label-color: #8e8883;
+$tick-color: #677089;
+$core-dark: #1d8087;
+$core-dark-darken: #1a7379;
+$core-logo: #2dccd3;
+$core-logo-darken: #28a7ac;
+$core-logo-disabled: #1d5c5f;
+$core-darkmode-dark: #1b4d50;
+$core-darkmode-darken: #1c6569;
+$core-light: #53bbb8;
+$core-disabled: #b3d4d7;
+$core-white: #fff;
+$core-info: #2196f3;
+$core-warning: #fb8c00;
+$core-error: #ff5252;
+$core-info-hover: #1975c1;
+$core-warning-hover: #ac5f00;
+$core-error-hover: #b02626;
+// for legacy consumers of $core-blue;
+$core-blue: $core-light;
+$true-white: #ffffff;
+$true-black: #000000;
+
+$text-dark: #4a4a4a;
+$text-light: #979797;
+$text-light-on-dark: $true-white;
+
+$background-white: $true-white;
+$background-black: #252525;
+$background-dark: #ccc;
+$background-medium: #ddd;
+$background-light: #eee;
+$background-light-darken: #d6d6d6;
+$background-none-darken: #e5e5e5;
+$background-selected: #eeeeee;
+$background-smoke: rgba(68, 68, 68, 0.5);
+
+$border-dark: #ccc;
+$border-medium: #ddd;
+$border-light: #eee;
+$border-warning: #ff001f;
+$border-warning-20: rgba(
+  255,
+  0,
+  31,
+  0.2
+); // current version of builder isn't compiling 8-digit hex correctly
+
+// component specific
+// sidebar gradient
+$sidebar-gradient-dark: linear-gradient(
+  180deg,
+  #1b1a27 0%,
+  #20222d 57.44%,
+  #2c2e3c 100%
+);
+$sidebar-control-background: #20222d;
+$sidebar-control-box-shadow: 0px 4px 4px 0px #000000 25%;
