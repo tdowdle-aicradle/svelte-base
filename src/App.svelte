@@ -5,6 +5,25 @@
 
 	import type { MenuBarItem } from './types/menubar.type';
 
+	import Router from 'svelte-spa-router';
+	import {wrap} from 'svelte-spa-router/wrap';
+
+	import Dashboard from './routes/Dashboard.svelte';
+	import Event from './routes/Event.svelte';
+	import NotFound from './routes/NotFound.svelte';
+
+
+
+	const routes = {
+		// Exact path
+		'/': Dashboard,
+		// Using named parameters
+		'/event/:id': Event,
+		// Catch-all
+		// This is optional, but if present it must be the last
+		'*': NotFound,
+	}
+
 	let dashboardSvg = "./assets/dashboard.svg";
 	let notesSvg = "./assets/notes.svg";
 	let settingsSvg = "./assets/settings.svg";
@@ -43,9 +62,6 @@
 
 <style lang="scss">
     main {
-        h1 {
-            font-size: 22rem;
-		}
 		.app-window {
 			@apply pl-8;
 			background: #13131A;
@@ -78,21 +94,7 @@
 			</SideBar>	
 		</div>	
 		<div class="flex-grow app-window">
-			<h1 class="text-red-400">The rest of our app will be here</h1>
+			<Router {routes}/>
 		</div>
 	</div>	
-<!-- 	<SideBar
-		:pushContent="true"
-		:rightHand="false"
-		:isOpen="sideBarOpen"
-		@sideBarClose="toggleSideBar()"
-		@sideBarOpen="toggleSideBar()"
-	>
-		<template v-slot:opened-slot>
-		<MenuBar :isOpen="sideBarOpen" :menuItems="menuItems"></MenuBar>
-		</template>
-		<template v-slot:closed-slot>
-		<MenuBar :isOpen="sideBarOpen" :menuItems="menuItems"></MenuBar>
-		</template>
-	</SideBar> -->
 </main>
