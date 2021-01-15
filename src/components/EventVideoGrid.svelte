@@ -127,7 +127,7 @@ let filterCameras = [];
 
 </style>
 
-<div class="event-video-grid overflow-hidden">
+<div class="event-video-grid overflow-hidden flex-grow">
     <div class="flex justify-between px-4 py-2">
     <div class="flex px-4 py-2 gap-2">
         <h6

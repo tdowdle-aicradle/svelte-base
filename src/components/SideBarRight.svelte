@@ -91,7 +91,7 @@
 
 
     <div
-      class="flex menu-bar pt-2 side-bar-right overflow-hidden flex-grow w-1/3"
+      class="flex menu-bar pt-2 side-bar-right overflow-hidden w-1/3"
     >
       <div class="flex h-full">
         <div
