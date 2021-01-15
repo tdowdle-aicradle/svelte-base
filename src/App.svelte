@@ -9,11 +9,13 @@
 
 	import Dashboard from './routes/Dashboard.svelte';
 	import Event from './routes/Event.svelte';
+	import Settings from './routes/Settings.svelte';
 	import NotFound from './routes/NotFound.svelte';
 
 	const routes = {
 		// Exact path
 		'/': Dashboard,
+		'/settings': Settings,
 		// Using named parameters
 		'/event/:id': Event,
 		// Catch-all
