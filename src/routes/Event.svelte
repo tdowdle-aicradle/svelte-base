@@ -1,6 +1,8 @@
 <script type="ts">
     import EventHeader from '../components/EventHeader.svelte';
     import EventVideoGrid from '../components/EventVideoGrid.svelte';
+    import SideBarRight from '../components/SideBarRight.svelte';
+    import MultiPane from '../components/MultiPane.svelte';
 
     let activeEvent = {
         additionalInfo: {},
@@ -42,17 +44,16 @@
                     <tool-bar class="inset-y-0 right-0"></tool-bar>
                 </div>
             </div>
-            <multi-pane>
+            <MultiPane>
                 {#if activeEvent.camera}
                     <EventVideoGrid
                         camera="{activeEvent.camera}"
                     ></EventVideoGrid>
                 {/if}
-                <side-bar-right
-                    id="side-bar-right"
+                <SideBarRight
                     additionalInfo="{activeEvent.additionalInfo}"
-                ></side-bar-right>
-            </multi-pane>
+                ></SideBarRight>
+            </MultiPane>
         </div>
         </div>
     </div>
