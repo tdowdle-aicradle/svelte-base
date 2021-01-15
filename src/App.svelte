@@ -11,8 +11,6 @@
 	import Event from './routes/Event.svelte';
 	import NotFound from './routes/NotFound.svelte';
 
-
-
 	const routes = {
 		// Exact path
 		'/': Dashboard,
@@ -61,6 +59,9 @@
 
 <style lang="scss">
     main {
+		font-family: Avenir, Helvetica, Arial, sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
 		.app-window {
 			@apply pl-8;
 			background: #13131A;
@@ -72,24 +73,25 @@
 
 <Tailwind />
 <main>
-	<div class="app__layout flex">
+	<div class="app__layout flex min-h-screen">
 		<div class="app__menu">
 			<SideBar
 				on:sideBarClose={toggleSideBar}
 				on:sideBarOpen={toggleSideBar}
 				isOpen="{sideBarOpen}"
-				rightHand="{true}"
+				pushContent="{true}"
+				rightHand="{false}"
 			>
 
-			<!-- Do we need two slots here? -->
+				<!-- Do we need two slots here? -->
 
-			<div slot="opened-slot">
-				<MenuBar menuOpen="{sideBarOpen}" menuItems="{menuItems}"></MenuBar>
-			</div>
+				<div slot="opened-slot">
+					<MenuBar menuOpen="{sideBarOpen}" menuItems="{menuItems}"></MenuBar>
+				</div>
 
-			<div slot="closed-slot">
-				<MenuBar menuOpen="{sideBarOpen}" menuItems="{menuItems}"></MenuBar>
-			</div>
+				<div slot="closed-slot">
+					<MenuBar menuOpen="{sideBarOpen}" menuItems="{menuItems}"></MenuBar>
+				</div>
 
 			</SideBar>	
 		</div>	

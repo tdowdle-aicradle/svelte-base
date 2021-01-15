@@ -1,5 +1,8 @@
 <script lang="ts">
     import type { MenuBarItem } from '../types/menubar.type';
+
+    import {link} from 'svelte-spa-router'
+    import active from 'svelte-spa-router/active'
     
     export let menuItems:Array<MenuBarItem>;
     export let menuOpen:boolean;
@@ -36,7 +39,7 @@
                         }
                     }
                     .icon * {
-                        fill: $si-icon-active;
+                        filter: $si-filter-active;
                     }
                 }
             }
@@ -62,9 +65,10 @@
     <div class="menu-items flex-col">
         {#each menuItems as menuItem, index}
             <a
-                data-to="{menuItem.url}"
-                exact-active-class="active-link"
-                class="menu-item flex cursor-pointer"
+                href="{menuItem.url}"
+                use:link
+                use:active={{className: 'active-link'}}
+                class="menu-item active-link flex cursor-pointer"
             >
                 <div class="active-mark">
                     <img src="./assets/active-state-mark.svg" />

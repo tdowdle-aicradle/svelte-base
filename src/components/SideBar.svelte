@@ -5,8 +5,8 @@
 
     export let isOpen = false;
     export let rightHand = true;
+    export let pushContent = false;
     export let background = "linear-gradient(180deg, #1b1a27 0%, #20222d 57.44%, #2c2e3c 100%)";
-
 
     const dispatch = createEventDispatcher();
 
@@ -15,11 +15,15 @@
         background: background
     }
 
+    if (pushContent) {
+      styleObject.position = "relative";
+    }
+
     let customStyles = '';
 
     $: Object.entries(styleObject).forEach(([key, value]) => {
-		customStyles += `${key}: ${value};`
-	})
+		  customStyles += `${key}: ${value};`
+	  })
 
     function emitSideBarClose() {
 		dispatch('sideBarClose');
@@ -49,7 +53,7 @@
 {#if isOpen}
     <div
         style="{customStyles}"
-        class="side-bar h-full min-h-screen shadow"
+        class="side-bar h-full shadow"
         class:side-bar__right="{rightHand}"
         class:right-0="{rightHand}"
         class:side-bar__left="{!rightHand}"
@@ -68,7 +72,7 @@
 {:else}
     <div
         style="{customStyles}"
-        class="side-bar h-full min-h-screen shadow"
+        class="side-bar h-full shadow"
         class:side-bar__right="{rightHand}"
         class:right-0="{rightHand}"
         class:side-bar__right--closed="{rightHand}"
