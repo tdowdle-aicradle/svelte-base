@@ -1,6 +1,5 @@
 
   <script type="ts">
-    
       let onMouseDown = function ({ target: resizer, pageX: initialPageX, touches: touchEvents }) {
         if (
           resizer.parentElement.classList.length !== 0 &&
@@ -35,7 +34,6 @@
     
           // Resize once to get current computed size
           let size = resize();
-    
           // Trigger paneResizeStart event
 /*           self.$emit("paneResizeStart", videoPane, resizer, size);
           self.$emit(
@@ -54,8 +52,14 @@
             const sideBarSize = usePercentage
               ? 100 - Number(size.replace("%", "")) + "%"
               : containerWidth - Number(size.replace("px", "")) + "px";
-            sideBarPane.innerHeight = sideBarSize;
-            sideBarPane.style.width = sideBarSize;
+
+            let getPercentage = sideBarPane.offsetWidth/self.offsetWidth;
+
+            if((getPercentage >= .25 && getPercentage <= .70) || (getPercentage < .25 && parseInt(sideBarSize) > parseInt(sideBarPane.style.width))){
+                sideBarPane.innerHeight = sideBarSize;
+                sideBarPane.style.width = sideBarSize;
+            }
+
 /*             self.$emit(
               "paneResize",
               sideBarPane,
