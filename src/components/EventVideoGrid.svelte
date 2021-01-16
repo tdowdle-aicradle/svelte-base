@@ -70,8 +70,10 @@ let filterCameras = [];
 
 .event-video-grid {
   background-color: $si-background-dark;
+  width: 98%;
+  max-width: 98%;
+  min-width: 24%;
 }
-
 .detection-switch {
   /* Rectangle 1985 */
   width: 50.88px;
@@ -127,7 +129,7 @@ let filterCameras = [];
 
 </style>
 
-<div class="event-video-grid overflow-hidden flex-grow">
+<div id="event-video-grid" class="event-video-grid overflow-hidden flex-grow">
     <div class="flex justify-between px-4 py-2">
     <div class="flex px-4 py-2 gap-2">
         <h6

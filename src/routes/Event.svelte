@@ -25,6 +25,7 @@
     }
 
 </script>
+
 {#if activeEvent}
     <div class="text-center h-full">
         {#if activeEvent.error}

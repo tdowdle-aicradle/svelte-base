@@ -1,8 +1,6 @@
 
   <script type="ts">
     
-      let isResizing = false;
-    
       let onMouseDown = function ({ target: resizer, pageX: initialPageX, touches: touchEvents }) {
         if (
           resizer.parentElement.classList.length !== 0 &&
@@ -13,7 +11,6 @@
         ) {
           /* eslint-disable  @typescript-eslint/no-this-alias */
           const self = this;
-          const { $el: container } = this;
           if (initialPageX === undefined) {
             initialPageX = touchEvents[0].pageX;
           }
@@ -23,7 +20,7 @@
           const { offsetWidth: initialPaneWidth } = videoPane;
     
           const usePercentage = !!(videoPane.style.width + "").match("%");
-          const containerWidth = container.clientWidth;
+          const containerWidth = self.clientWidth;
           const resize = (initialSize, offset = 0) => {
             const paneWidth = initialSize + offset;
             const videoSize = usePercentage
@@ -34,58 +31,56 @@
           };
     
           // This adds is-resizing class to container
-          self.isResizing = true;
+          self.classList.add("is-resizing");
     
           // Resize once to get current computed size
           let size = resize();
     
           // Trigger paneResizeStart event
-          self.$emit("paneResizeStart", videoPane, resizer, size);
+/*           self.$emit("paneResizeStart", videoPane, resizer, size);
           self.$emit(
             "paneResizeStart",
             sideBarPane,
             resizer,
             containerWidth - Number(size.replace("px", "")) + "px"
-          );
+          ); */
     
           const onMouseMove = function({ pageX: pageX, touches: touchEvents }) {
             if (pageX === undefined) {
               pageX = touchEvents[0].pageX;
             }
             size = resize(initialPaneWidth, pageX - initialPageX);
-            self.$emit("paneResize", videoPane, resizer, size);
+            //self.$emit("paneResize", videoPane, resizer, size);
             const sideBarSize = usePercentage
               ? 100 - Number(size.replace("%", "")) + "%"
               : containerWidth - Number(size.replace("px", "")) + "px";
             sideBarPane.innerHeight = sideBarSize;
             sideBarPane.style.width = sideBarSize;
-            self.$emit(
+/*             self.$emit(
               "paneResize",
               sideBarPane,
               resizer,
               containerWidth - Number(size.replace("px", "")) + "px"
-            );
+            ); */
           };
     
           const onMouseUp = function() {
             // Run resize one more time to set computed width/height.
-            //size = resize(pane.clientWidth);
-    
             // This removes is-resizing class to container
-            self.isResizing = false;
+            self.classList.remove("is-resizing");
     
             removeEventListener("mousemove", onMouseMove);
             removeEventListener("mouseup", onMouseUp);
             removeEventListener("touchmove", onMouseMove);
             removeEventListener("touchend", onMouseUp);
     
-            self.$emit("paneResizeStop", videoPane, resizer, size);
+/*             self.$emit("paneResizeStop", videoPane, resizer, size);
             self.$emit(
               "paneResizeStop",
               sideBarPane,
               resizer,
               containerWidth - Number(size.replace("px", "")) + "px"
-            );
+            ); */
           };
     
           addEventListener("mousemove", onMouseMove);
@@ -114,9 +109,9 @@
         }
 
         .multipane-resizer {
-        display: flex;
-        position: relative;
-        z-index: 2;
+            display: flex;
+            position: relative;
+            z-index: 2;
         }
 
         .layout-v > .multipane-resizer {

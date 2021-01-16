@@ -2,8 +2,7 @@
 
 
   <script type="ts">
-/*     import MultipaneResizer from "@/components/MultiPane/MultipaneResizer";
-    import MultiPane from "@/components/MultiPane/MultiPane"; */
+    import MultipaneResizer from "./MultiPaneResizer.svelte";
 
     export let additionalInfo:Object;
 
@@ -79,6 +78,14 @@
   z-index: 2;
 }
 
+.resizer-img {
+    user-drag: none; 
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
 .layout-v > .multipane-resizer {
   width: 10px;
   height: 100%;
@@ -88,9 +95,8 @@
 }
 
 </style>
-
-
     <div
+      id="side-bar-right"
       class="flex menu-bar pt-2 side-bar-right overflow-hidden w-1/3"
     >
       <div class="flex h-full">
@@ -98,9 +104,9 @@
           class="flex flex-col justify-end h-custom"
           on:mousedown="{activateResize}"
         >
-          <multipane-resizer>
-            <img src="./assets/pane-handle.svg" />
-          </multipane-resizer>
+          <MultipaneResizer>
+            <img class="resizer-img" src="./assets/pane-handle.svg" />
+          </MultipaneResizer>
         </div>
         {#if additionalInfo}
             <div class="flex flex-col justify-start">
