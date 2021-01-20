@@ -103,3 +103,17 @@ Then, from within your project folder:
 npm run build
 surge public my-project.surge.sh
 ```
+
+### Run https locally on 8081 for safe intersection bff integration
+
+Generate local cert 
+#### macOS
+
+* `brew install mkcert` installs [mkcert](https://blog.filippo.io/mkcert-valid-https-certificates-for-localhost/)
+* `mkcert -install` initializes mkcert and adds a trusted certificate authority to the Keychain. _**Caution:** This is a potential security risk._
+* `mkcert localhost` creates two `*.pem` files in the current directory
+
+Change start command to the following:
+
+"start": "sirv public --port 8081 --http2 --cert localhost.pem --key localhost-key.pem",
+
