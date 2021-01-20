@@ -70,7 +70,7 @@ export function getUserSession() {
     const session = validateUserSession();
 
     if (!session.valid) {
-      const currentPath = window.location.pathname;
+      const currentPath = window.location.hash;
       if (nonCacheRoutes.indexOf(currentPath) < 0) {
         localStorage.setItem("routeCache", currentPath);
       }

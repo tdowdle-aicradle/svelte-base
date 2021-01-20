@@ -3,15 +3,11 @@
     import EventVideoGrid from '../components/EventVideoGrid.svelte';
     import SideBarRight from '../components/SideBarRight.svelte';
     import MultiPane from '../components/MultiPane.svelte';
-import Toolbar from '../components/Toolbar.svelte';
+    import Toolbar from '../components/Toolbar.svelte';
 
-    let activeEvent = {
-        additionalInfo: {},
-        time_from: 1610732923435,
-        camera: {}
-    } as any,
-    eventTime = getEventTime(),
-    eventLocation = getEventLocation();
+    import { retrieveEvent, activeEventStore } from '../stores/event';
+
+    let eventTime, eventLocation, activeEvent;
 
     function getEventTime() {
         const date = new Date();
@@ -21,9 +17,24 @@ import Toolbar from '../components/Toolbar.svelte';
     }
 
     function getEventLocation() {
-        const location = activeEvent?.additionalInfo?.location;
+        const location = activeEvent?.additional_info?.location;
         return location == undefined ? "Unknown" : location;
     }
+
+    async function setupEventStore() {
+        let hash = window.location.hash;
+        hash = hash.substring(hash.lastIndexOf('/')+1)
+        await retrieveEvent(hash);
+    }
+
+    activeEventStore.subscribe((event)=>{
+        activeEvent = event;
+        console.log(event);
+        eventTime = getEventTime();
+        eventLocation = getEventLocation();
+    });
+
+    setupEventStore();
 
 </script>
 
@@ -53,7 +64,7 @@ import Toolbar from '../components/Toolbar.svelte';
                     ></EventVideoGrid>
                 {/if}
                 <SideBarRight
-                    additionalInfo="{activeEvent.additionalInfo}"
+                    additionalInfo="{activeEvent.additional_info}"
                 ></SideBarRight>
             </MultiPane>
         </div>

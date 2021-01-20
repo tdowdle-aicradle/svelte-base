@@ -6,16 +6,12 @@
 
     export let additionalInfo:Object;
 
-    additionalInfo = {
-        vehicles: []
-    };
-
     let showStats = true,
         mutateDiv = false,
-        color = additionalInfo.severity === "Severe";
+        color = additionalInfo?.severity === "Severe";
     
     function activateResize() {
-        this.mutateDiv = true;
+        mutateDiv = true;
     }
 
     function capitalizeFirstLetter(string) {

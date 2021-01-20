@@ -5,7 +5,9 @@
 
 	import type { MenuBarItem } from './types/menubar.type';
 
-	import Router from 'svelte-spa-router';
+	import { onMount } from 'svelte';
+
+	import Router,{ replace } from 'svelte-spa-router';
 	import { wrap } from 'svelte-spa-router/wrap';
 
 	import Dashboard from './routes/Dashboard.svelte';
@@ -14,10 +16,25 @@
 	import NotFound from './routes/NotFound.svelte';
 
 	import { getUser, logout } from './stores/user';
+	import { activeEventStore } from './stores/event';
 
 	import ApiService from "./api/api";
 
 	ApiService.init();
+
+	const cachedPath = localStorage.getItem("routeCache") || "/";
+	const currentPath = window.location.hash;
+
+	let activeEventId = -1;
+
+ 	if (currentPath === "") {
+		replace(cachedPath);
+	}
+
+	activeEventStore.subscribe(event=>{
+		activeEventId = event.id;
+	});
+
 
 	const routes = {
 		// Exact path
@@ -79,7 +96,7 @@
       },
       {
         name: "Accident Details",
-        url: `/event/activeEventId`,
+        url: `/event/${activeEventId}`,
         svgComponent: notesSvg
       },
       {
