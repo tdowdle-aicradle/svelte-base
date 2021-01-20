@@ -2,7 +2,7 @@ import { writable } from 'svelte/store';
 import { getEndPoint } from "../api/api";
 
 export const eventsStore = writable([]);
-export const activeEventStore = writable({ id: 622583 });
+export const activeEventStore = writable({ id: 622583, init:true });
 export const activeIntersectionStore = writable({});
 
 

@@ -1,65 +1,48 @@
 <script type="ts">
 
 import { onMount } from 'svelte';
-//import ShowDetectionSwitch from "@/assets/show-detection-switch.svg";
+import { retrieveEventIntersection, activeIntersectionStore } from '../stores/event';
 
 export let camera: Object;
 
-let showDetection = true,
-    intersectionResolve,
-    intersectionPromise = new Promise((intersectionResolve, reject) => {
-        intersectionResolve = intersectionResolve;
-    });
+let activeIntersection,
+  filterCameras = [],
+  showDetection = true,
+  intersectionResolve,
+  intersectionPromise = new Promise((resolve, reject) => {
+    intersectionResolve = resolve;
+  });
 
-(async () => {
-    await console.log('run this');
-/*     await this.$store
-        .dispatch(
-          "event/retrieveEventIntersection",
-          this.$props.camera.intersection_id
-        )
-        .then(result => {
-          this.intersectionResolve(result);
-        });   */  
-})();
+activeIntersectionStore.subscribe((intersection)=>{
+  activeIntersection = intersection;
+  if(activeIntersection.cameras){
+    filterCameras = activeIntersection.cameras.filter(aic => aic.id !== camera.id);
+    intersectionResolve(true);
+  }
+});
 
+retrieveEventIntersection(camera.intersection_id);
 
-let filterCameras = [];
+onMount(()=>{
+    if (Hls && Hls.isSupported()) {
+        // handle event camera
+        const video = document.getElementById("event-video");
+        const hls = new Hls();
+        hls.attachMedia(video);
+        hls.loadSource(camera.liveSource);
 
-/*     get activeIntersection() {
-      return this.$store.state.event.activeIntersection;
-    }
-  
-    get filterCameras() {
-      return this.activeIntersection
-        ? this.activeIntersection?.cameras?.filter(
-            camera => camera.id !== this.$props.camera.id
-          ) || []
-        : [];
-    } */
-
-    onMount(()=>{
-        let Hls = null;
-        if (Hls && Hls.isSupported()) {
-            // handle event camera
-            const video = document.getElementById("event-video");
+        intersectionPromise.then(()=>{
+          for (const camera of activeIntersection.cameras || []) {
+            const videoId = `camera-${camera.id}`;
+            const video = document.getElementById(videoId);
             const hls = new Hls();
             hls.attachMedia(video);
-            hls.loadSource(this.$props.camera.liveSource);
-    
-            //handle additional intersection cameras
-            this.intersectionPromise.then(() => {
-            for (const camera of this.activeIntersection.cameras || []) {
-                const videoId = `camera-${camera.id}`;
-                const video = document.getElementById(videoId);
-                const hls = new Hls();
-                hls.attachMedia(video);
-                console.log(camera.liveSource);
-                hls.loadSource(camera.liveSource);
-            }
-            });
-        }
-    });
+            console.log(camera.liveSource);
+            hls.loadSource(camera.liveSource);
+          }
+        })
+    }
+});
 
 
 </script>

@@ -2,22 +2,15 @@
 	import Tailwind from "./Tailwind.svelte"
 	import SideBar from './components/SideBar.svelte';
 	import MenuBar from './components/MenuBar.svelte';
-
 	import type { MenuBarItem } from './types/menubar.type';
-
-	import { onMount } from 'svelte';
-
 	import Router,{ replace } from 'svelte-spa-router';
 	import { wrap } from 'svelte-spa-router/wrap';
-
 	import Dashboard from './routes/Dashboard.svelte';
 	import Event from './routes/Event.svelte';
 	import Settings from './routes/Settings.svelte';
 	import NotFound from './routes/NotFound.svelte';
-
 	import { getUser, logout } from './stores/user';
 	import { activeEventStore } from './stores/event';
-
 	import ApiService from "./api/api";
 
 	ApiService.init();
@@ -34,7 +27,6 @@
 	activeEventStore.subscribe(event=>{
 		activeEventId = event.id;
 	});
-
 
 	const routes = {
 		// Exact path
@@ -83,10 +75,10 @@
 		'*': NotFound,
 	}
 
-	let dashboardSvg = "./assets/dashboard.svg";
-	let notesSvg = "./assets/notes.svg";
-	let settingsSvg = "./assets/settings.svg";
-	let logoutSvg = "./assets/logout.svg";
+	let dashboardSvg = "./assets/dashboard.svg",
+		notesSvg = "./assets/notes.svg",
+		settingsSvg = "./assets/settings.svg",
+		logoutSvg = "./assets/logout.svg";
 
 	let menuItems: Array<MenuBarItem> = [
       {
@@ -111,7 +103,7 @@
       }
 	];
 	
-	let sideBarOpen = false;
+	let sideBarOpen = true;
 
 	function toggleSideBar(event) {
 		sideBarOpen = !sideBarOpen;

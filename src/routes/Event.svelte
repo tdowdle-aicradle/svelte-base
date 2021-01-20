@@ -21,17 +21,18 @@
         return location == undefined ? "Unknown" : location;
     }
 
-    async function setupEventStore() {
+    function setupEventStore() {
         let hash = window.location.hash;
         hash = hash.substring(hash.lastIndexOf('/')+1)
-        await retrieveEvent(hash);
+        retrieveEvent(hash);
     }
 
     activeEventStore.subscribe((event)=>{
-        activeEvent = event;
-        console.log(event);
-        eventTime = getEventTime();
-        eventLocation = getEventLocation();
+        if(!event.init){
+            activeEvent = event;
+            eventTime = getEventTime();
+            eventLocation = getEventLocation();
+        }
     });
 
     setupEventStore();
