@@ -6,18 +6,61 @@
 	import type { MenuBarItem } from './types/menubar.type';
 
 	import Router from 'svelte-spa-router';
+	import { wrap } from 'svelte-spa-router/wrap';
 
 	import Dashboard from './routes/Dashboard.svelte';
 	import Event from './routes/Event.svelte';
 	import Settings from './routes/Settings.svelte';
 	import NotFound from './routes/NotFound.svelte';
 
+	import { getUser, logout } from './stores/user';
+
+	import ApiService from "./api/api";
+
+	ApiService.init();
+
 	const routes = {
 		// Exact path
 		'/': Dashboard,
 		'/settings': Settings,
 		// Using named parameters
-		'/event/:id': Event,
+		'/event/:id': wrap({
+			component:Event,
+			conditions: [
+				(detail) => {
+					return getUser().then(session => {
+						console.log(session);
+						console.log(detail);
+        				return true;
+					})
+					.catch(() => {
+						console.log("Login failed");
+						return false;
+					});
+				}
+			]
+			
+		}),
+		'/logout': wrap({
+			component: Dashboard,
+			conditions: [
+				() => {
+					return logout().then(logoutUrl => {
+						localStorage.removeItem("accessToken");
+						localStorage.removeItem("refreshToken");
+						localStorage.removeItem("routeCache");
+						window.location.href = logoutUrl;
+        				return false;
+					})
+					.catch((err) => {
+						console.log(err);
+						console.log("Logout failed");
+						debugger;
+						return false;
+					});
+				}
+			]
+		}),
 		// Catch-all
 		// This is optional, but if present it must be the last
 		'*': NotFound,

@@ -3,6 +3,7 @@
     import EventVideoGrid from '../components/EventVideoGrid.svelte';
     import SideBarRight from '../components/SideBarRight.svelte';
     import MultiPane from '../components/MultiPane.svelte';
+import Toolbar from '../components/Toolbar.svelte';
 
     let activeEvent = {
         additionalInfo: {},
@@ -42,7 +43,7 @@
                     cadId="{activeEvent.cad_id}"
                     location="{eventLocation}"
                     ></EventHeader>
-                    <tool-bar class="inset-y-0 right-0"></tool-bar>
+                    <Toolbar />
                 </div>
             </div>
             <MultiPane>
