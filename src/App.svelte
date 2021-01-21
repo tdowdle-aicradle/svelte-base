@@ -137,7 +137,7 @@
 				rightHand="{false}"
 			>
 
-				<!-- Do we need two slots here? -->
+				<!-- TODO: Do we need two slots here? -->
 
 				<div slot="opened-slot">
 					<MenuBar menuOpen="{sideBarOpen}" menuItems="{menuItems}"></MenuBar>

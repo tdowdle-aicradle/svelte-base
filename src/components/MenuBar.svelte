@@ -55,10 +55,10 @@
 >
     <div class="logo pt-8 pl-8 pb-8 flex">
     <div class="pr-2">
-        <img src="./assets/safeXai-logo.svg" />
+        <img width="30" height="21" src="./assets/safeXai-logo.svg" />
     </div>
     {#if menuOpen}
-        <img src="./assets/safeXai-name.svg" />
+        <img width="133" height="22" src="./assets/safeXai-name.svg" />
     {/if}
     </div>
     <div class="chevron"></div>
@@ -71,10 +71,10 @@
                 class="menu-item active-link flex cursor-pointer"
             >
                 <div class="active-mark">
-                    <img src="./assets/active-state-mark.svg" />
+                    <img width="23" height="50" src="./assets/active-state-mark.svg" />
                 </div>
                 <div class="icon">
-                    <img src="{menuItem.svgComponent}" />
+                    <img width="27" height="27" src="{menuItem.svgComponent}" />
                 </div>
                 {#if menuOpen}
                     <a class="pl-4">{menuItem.name}</a>
